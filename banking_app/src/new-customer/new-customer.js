@@ -9,7 +9,7 @@ export function NewCustomer() {
   const handle = () => {
     localStorage.setItem("ID", id);
     localStorage.setItem("Name", name);
-    localStorage.setItem("Deposite", depo);
+    localStorage.setItem("Deposit", depo);
   };
 
   return (
@@ -40,6 +40,9 @@ export function NewCustomer() {
         <div>
           <button onClick={handle}>Done</button>
         </div>
+        {localStorage.getItem("ID")}
+        {localStorage.getItem("Name")}
+        {localStorage.getItem("Deposit")}
       </form>
     </div>
   );
