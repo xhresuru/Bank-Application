@@ -1,28 +1,45 @@
 import styles from "./new-customer.module.css";
+import React, { useState } from "react";
 
 export function NewCustomer() {
-  const onNewCustomer = (e) => {
-    e.preventDefault();
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [depo, setDeposit] = useState("");
 
-    console.log(e.target);
-    const acId = e.target.acId.value;
-    const acName = e.target.acName.value;
-    const balance = e.target.balance.value;
-
-    console.log(`Id ${acId} Name ${acName} Balance ${balance}`);
+  const handle = () => {
+    localStorage.setItem("ID", id);
+    localStorage.setItem("Name", name);
+    localStorage.setItem("Deposite", depo);
   };
 
   return (
     <div className={styles.custCont}>
-      <h1> Create New Customer</h1>
-      <form onSubmit={onNewCustomer}>
-        <input type="number" placeholder="Account Id" name="acId" />
+      <h1>Create New Customer</h1>
+      <form onSubmit={handle}>
+        <input
+          type="number"
+          placeholder="Account Number"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
 
-        <input type="text" placeholder="Account Name" name="acName" />
+        <input
+          type="text"
+          placeholder=" Account Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-        <input type="number" placeholder="Balance" name="balance" />
+        <input
+          type="number"
+          placeholder="Initial Deposite"
+          value={depo}
+          onChange={(e) => setDeposit(e.target.value)}
+        />
 
-        <input type="submit" value="Create" />
+        <div>
+          <button onClick={handle}>Done</button>
+        </div>
       </form>
     </div>
   );
