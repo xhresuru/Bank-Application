@@ -8,7 +8,7 @@ export function Dashboard() {
     <div className={styles.dashCont}>
       <div onClick={() => navigate("/new")}>New Customer</div>
       <div onClick={() => navigate("/deposit")}>Deposit</div>
-      <div>Withdraw</div>
+      <div onClick={() => navigate("/withdraw")}>Withdraw</div>
       <div>Transfer</div>
       <div>Balance</div>
     </div>

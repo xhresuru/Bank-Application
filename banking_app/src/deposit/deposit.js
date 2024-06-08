@@ -11,7 +11,7 @@ export function Deposit() {
   };
   return (
     <div className={styles.depCont}>
-      <h1>Deposit Ammount</h1>
+      <h1>Deposit Amount</h1>
       <form onSubmit={handle}>
         <input
           type="number"
