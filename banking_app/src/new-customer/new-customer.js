@@ -40,9 +40,9 @@ export function NewCustomer() {
         <div>
           <button onClick={handle}>Done</button>
         </div>
-        {localStorage.getItem("ID")}
+        {/* {localStorage.getItem("ID")}
         {localStorage.getItem("Name")}
-        {localStorage.getItem("Deposit")}
+        {localStorage.getItem("Deposit")} */}
       </form>
     </div>
   );
