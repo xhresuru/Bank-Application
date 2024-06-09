@@ -2,7 +2,6 @@ import styles from "./new-customer.module.css";
 import React, { useEffect, useState } from "react";
 
 export function NewCustomer() {
-  var customer_index = 0;
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [depo, setDepo] = useState("");
@@ -17,10 +16,10 @@ export function NewCustomer() {
 
   const handle = (e) => {
     e.preventDefault();
-    customer_index++;
+    var count = depoList ? depoList?.length + 1 : 1;
     const newDepoList = [
       ...depoList,
-      { id: customer_index, acc_id: id, name, depo, type: "DEPOSIT" },
+      { id: count, acc_id: id, name, depo, type: "DEPOSIT" },
     ];
     setDepoList(newDepoList);
     localStorage.setItem("depo", JSON.stringify(newDepoList));
@@ -29,7 +28,7 @@ export function NewCustomer() {
   const uniqueAccIds = [...new Set(depoList.map((item) => item.acc_id))];
 
   return (
-    <div>
+    <div className={styles.custCont}>
       <form onSubmit={handle}>
         <input
           type="text"

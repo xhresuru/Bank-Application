@@ -86,7 +86,8 @@ export function Deposit() {
             <th>ID</th>
             <th>Acc id</th>
             <th>Name</th>
-            <th>Deposit</th>
+            <th>Deposit </th>
+            <th>type </th>
           </tr>
         </thead>
         <tbody>
@@ -96,6 +97,7 @@ export function Deposit() {
               <td>{item.acc_id}</td>
               <td>{item.name}</td>
               <td>{item.depo}</td>
+              <td>{item.type}</td>
             </tr>
           ))}
         </tbody>
