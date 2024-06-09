@@ -1,5 +1,6 @@
 import styles from "./deposit.module.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Deposit() {
   const [id, setId] = useState("");
@@ -49,58 +50,65 @@ export function Deposit() {
       : total - parseInt(item.depo);
   }, 0);
 
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.depCont}>
-      <h1>Deposit Amount</h1>
-      <form onSubmit={handle}>
-        <select value={id} onChange={handleAccountChange} required>
-          <option value="">Select Account</option>
-          {uniqueData.map((account) => (
-            <option key={account.id} value={account.acc_id}>
-              {account.name}
-            </option>
-          ))}
-        </select>
+    <>
+      <button className={styles.button} onClick={() => navigate("/")}>
+        Back
+      </button>
+      <div className={styles.depCont}>
+        <h1>Deposit Amount</h1>
+        <form onSubmit={handle}>
+          <select value={id} onChange={handleAccountChange} required>
+            <option value="">Select Account</option>
+            {uniqueData.map((account) => (
+              <option key={account.id} value={account.acc_id}>
+                {account.name}
+              </option>
+            ))}
+          </select>
 
-        <input
-          type="text"
-          value={depo}
-          onChange={(e) => setDepo(e.target.value)}
-          placeholder="Deposit"
-          required
-        />
+          <input
+            type="text"
+            value={depo}
+            onChange={(e) => setDepo(e.target.value)}
+            placeholder="Deposit"
+            required
+          />
 
-        <div>
-          <button type="submit">Deposit</button>
-        </div>
-      </form>
+          <div>
+            <button type="submit">Deposit</button>
+          </div>
+        </form>
 
-      <h2>Deposits</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Acc id</th>
-            <th>Name</th>
-            <th>Deposit </th>
-            <th>type </th>
-          </tr>
-        </thead>
-        <tbody>
-          {userDeposits.map((item, index) => (
-            <tr key={index}>
-              <td>{item.id}</td>
-              <td>{item.acc_id}</td>
-              <td>{item.name}</td>
-              <td>{item.depo}</td>
-              <td>{item.type}</td>
+        <h2>Deposits</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Acc ID</th>
+              <th>Name</th>
+              <th>Deposit </th>
+              <th>Type </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        Total deposit of user {names} is RS {totalDepositSum}
+          </thead>
+          <tbody>
+            {userDeposits.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.acc_id}</td>
+                <td>{item.name}</td>
+                <td>{item.depo}</td>
+                <td>{item.type}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div>
+          Total deposit of user {names} is RS {totalDepositSum}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

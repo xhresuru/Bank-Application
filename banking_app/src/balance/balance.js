@@ -1,5 +1,6 @@
 import styles from "./balance.module.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Balance() {
   const [id, setId] = useState("");
@@ -49,44 +50,53 @@ export function Balance() {
       : total - parseInt(item.depo);
   }, 0);
 
-  return (
-    <div className={styles.balCont}>
-      <h1>Balance</h1>
-      <form onSubmit={handle}>
-        <select value={id} onChange={handleAccountChange} required>
-          <option value="">Select Account</option>
-          {uniqueData.map((account) => (
-            <option key={account.id} value={account.acc_id}>
-              {account.name}
-            </option>
-          ))}
-        </select>
-      </form>
+  const navigate = useNavigate();
 
-      <h2>Balance</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Acc id</th>
-            <th>Name</th>
-            <th>Deposit </th>
-          </tr>
-        </thead>
-        <tbody>
-          {userDeposits.map((item, index) => (
-            <tr key={index}>
-              <td>{item.id}</td>
-              <td>{item.acc_id}</td>
-              <td>{item.name}</td>
-              <td>{item.depo}</td>
+  return (
+    <>
+      <button className={styles.button} onClick={() => navigate("/")}>
+        Back
+      </button>
+      <div className={styles.balCont}>
+        <h1>Balance & Statement</h1>
+        <form onSubmit={handle}>
+          <select value={id} onChange={handleAccountChange} required>
+            <option value="">Select Account</option>
+            {uniqueData.map((account) => (
+              <option key={account.id} value={account.acc_id}>
+                {account.name}
+              </option>
+            ))}
+          </select>
+        </form>
+
+        <h2>Balance & Statement</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Acc ID</th>
+              <th>Name</th>
+              <th>Deposit </th>
+              <th>Type </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        Total balance of user {names} is RS {totalDepositSum}
+          </thead>
+          <tbody>
+            {userDeposits.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.acc_id}</td>
+                <td>{item.name}</td>
+                <td>{item.depo}</td>
+                <td>{item.type}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div>
+          Total balance of user {names} is RS {totalDepositSum}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

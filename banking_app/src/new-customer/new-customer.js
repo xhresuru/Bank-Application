@@ -1,5 +1,6 @@
 import styles from "./new-customer.module.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function NewCustomer() {
   const [id, setId] = useState("");
@@ -26,52 +27,58 @@ export function NewCustomer() {
   };
 
   const uniqueAccIds = [...new Set(depoList.map((item) => item.acc_id))];
+  const navigate = useNavigate();
 
   return (
-    <div className={styles.custCont}>
-      <form onSubmit={handle}>
-        <input
-          type="text"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          placeholder="ID"
-          required
-        />
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          required
-        />
-        <input
-          type="text"
-          value={depo}
-          onChange={(e) => setDepo(e.target.value)}
-          placeholder="Deposit"
-          required
-        />
-        <button type="submit">Add Deposit</button>
-      </form>
+    <>
+      <button className={styles.button} onClick={() => navigate("/")}>
+        Back
+      </button>
+      <div className={styles.custCont}>
+        <form onSubmit={handle}>
+          <input
+            type="text"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            placeholder="Account ID"
+            required
+          />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            required
+          />
+          <input
+            type="text"
+            value={depo}
+            onChange={(e) => setDepo(e.target.value)}
+            placeholder="Deposit"
+            required
+          />
+          <button type="submit">Add Deposit</button>
+        </form>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Deposit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {depoList.map((item, index) => (
-            <tr key={index}>
-              <td>{item.acc_id}</td>
-              <td>{item.name}</td>
-              <td>{item.depo}</td>
+        {/* <table>
+          <thead>
+            <tr>
+              <th>Account ID</th>
+              <th>Name</th>
+              <th>Deposit</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {depoList.map((item, index) => (
+              <tr key={index}>
+                <td>{item.acc_id}</td>
+                <td>{item.name}</td>
+                <td>{item.depo}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table> */}
+      </div>
+    </>
   );
 }
