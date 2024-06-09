@@ -20,7 +20,7 @@ export function NewCustomer() {
     customer_index++;
     const newDepoList = [
       ...depoList,
-      { id: customer_index, acc_id: id, name, depo },
+      { id: customer_index, acc_id: id, name, depo, type: "DEPOSIT" },
     ];
     setDepoList(newDepoList);
     localStorage.setItem("depo", JSON.stringify(newDepoList));

@@ -21,7 +21,7 @@ export function Deposit() {
     var count = depoList.length + 1;
     const newDepoList = [
       ...depoList,
-      { id: count, acc_id: id, name: names, depo: depo },
+      { id: count, acc_id: id, name: names, depo: depo, type: "DEPOSIT" },
     ];
     setDepoList(newDepoList);
     localStorage.setItem("depo", JSON.stringify(newDepoList));
@@ -46,10 +46,12 @@ export function Deposit() {
     : [];
 
   // Calculate total deposit sum of selected user
-  const totalDepositSum = userDeposits.reduce(
-    (total, item) => total + parseInt(item.depo),
-    0
-  );
+  const totalDepositSum = userDeposits.reduce((total, item) => {
+    // If the type is 'deposit', add the deposit amount, otherwise subtract it
+    return item.type === "DEPOSIT"
+      ? total + parseInt(item.depo)
+      : total - parseInt(item.depo);
+  }, 0);
 
   return (
     <div className={styles.depCont}>

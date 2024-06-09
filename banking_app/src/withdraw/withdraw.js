@@ -1,37 +1,110 @@
 import styles from "./withdraw.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export function Withdraw() {
   const [id, setId] = useState("");
-  const [withdraw, setWithdraw] = useState("");
+  const [depoList, setDepoList] = useState([]);
+  const [depo, setDepo] = useState("");
+  const [names, setName] = useState("");
+  const [acc_id, setACC_id] = useState("");
 
-  const handle = () => {
-    localStorage.setItem("ID", id);
-    localStorage.setItem("Withdraw", withdraw);
+  useEffect(() => {
+    const storedDepoList = localStorage.getItem("depo");
+    if (storedDepoList) {
+      console.log(storedDepoList);
+      setDepoList(JSON.parse(storedDepoList));
+    }
+  }, []);
+
+  const handle = (e) => {
+    e.preventDefault();
+    var count = depoList.length + 1;
+    const newDepoList = [
+      ...depoList,
+      { id: count, acc_id: id, name: names, depo: depo, type: "WITHDRAW" },
+    ];
+    setDepoList(newDepoList);
+    localStorage.setItem("depo", JSON.stringify(newDepoList));
   };
+  const uniqueData = Array.from(
+    new Set(depoList.map((item) => item.acc_id))
+  ).map((acc_id) => depoList.find((obj) => obj.acc_id === acc_id));
+
+  const handleAccountChange = (event) => {
+    const selectedId = event.target.value;
+    setId(selectedId);
+
+    // Filter depoList to find the selected account
+    const account = depoList.find((account) => account.acc_id === selectedId);
+    setName(account?.name);
+    setACC_id(account?.acc_id);
+    console.log(account?.name);
+  };
+
+  const userDeposits = acc_id
+    ? depoList.filter((item) => item.acc_id === acc_id)
+    : [];
+
+  // Calculate total deposit sum of selected user
+  const totalDepositSum = userDeposits.reduce((total, item) => {
+    // If the type is 'deposit', add the deposit amount, otherwise subtract it
+    return item.type === "DEPOSIT"
+      ? total + parseInt(item.depo)
+      : total - parseInt(item.depo);
+  }, 0);
 
   return (
     <div className={styles.withCont}>
       <h1>Withdraw Amount</h1>
       <form onSubmit={handle}>
-        <input
-          type="number"
-          placeholder="Account Number"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
+        <select value={id} onChange={handleAccountChange} required>
+          <option value="">Select Account</option>
+          {uniqueData.map((account) => (
+            <option key={account.id} value={account.acc_id}>
+              {account.name}
+            </option>
+          ))}
+        </select>
 
         <input
-          type="number"
-          placeholder="Withdraw Amount"
-          value={withdraw}
-          onChange={(e) => setWithdraw(e.target.value)}
+          type="text"
+          value={depo}
+          onChange={(e) => setDepo(e.target.value)}
+          placeholder="Withdraw"
+          required
         />
 
         <div>
-          <button onClick={handle}>Withdraw</button>
+          <button type="submit">Withdraw</button>
         </div>
       </form>
+
+      <h2>Withdraw</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Acc id</th>
+            <th>Name</th>
+            <th>amount</th>
+            <th>type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userDeposits.map((item, index) => (
+            <tr key={index}>
+              <td>{item.id}</td>
+              <td>{item.acc_id}</td>
+              <td>{item.name}</td>
+              <td>{item.depo}</td>
+              <td>{item.type}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div>
+        Total ammount of user {names} is RS {totalDepositSum}
+      </div>
     </div>
   );
 }
