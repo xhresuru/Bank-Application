@@ -1,49 +1,78 @@
 import styles from "./new-customer.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export function NewCustomer() {
+  var customer_index = 0;
   const [id, setId] = useState("");
   const [name, setName] = useState("");
-  const [depo, setDeposit] = useState("");
+  const [depo, setDepo] = useState("");
+  const [depoList, setDepoList] = useState([]);
 
-  const handle = () => {
-    localStorage.setItem("ID", id);
-    localStorage.setItem("Name", name);
-    localStorage.setItem("Deposit", depo);
+  useEffect(() => {
+    const storedDepoList = localStorage.getItem("depo");
+    if (storedDepoList) {
+      setDepoList(JSON.parse(storedDepoList));
+    }
+  }, []);
+
+  const handle = (e) => {
+    e.preventDefault();
+    customer_index++;
+    const newDepoList = [
+      ...depoList,
+      { id: customer_index, acc_id: id, name, depo },
+    ];
+    setDepoList(newDepoList);
+    localStorage.setItem("depo", JSON.stringify(newDepoList));
   };
 
+  const uniqueAccIds = [...new Set(depoList.map((item) => item.acc_id))];
+
   return (
-    <div className={styles.custCont}>
-      <h1>Create New Customer</h1>
+    <div>
       <form onSubmit={handle}>
         <input
-          type="number"
-          placeholder="Account Number"
+          type="text"
           value={id}
           onChange={(e) => setId(e.target.value)}
+          placeholder="ID"
+          required
         />
-
         <input
           type="text"
-          placeholder=" Account Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          required
         />
-
         <input
-          type="number"
-          placeholder="Initial Deposite"
+          type="text"
           value={depo}
-          onChange={(e) => setDeposit(e.target.value)}
+          onChange={(e) => setDepo(e.target.value)}
+          placeholder="Deposit"
+          required
         />
-
-        <div>
-          <button onClick={handle}>Done</button>
-        </div>
-        {/* {localStorage.getItem("ID")}
-        {localStorage.getItem("Name")}
-        {localStorage.getItem("Deposit")} */}
+        <button type="submit">Add Deposit</button>
       </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Deposit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {depoList.map((item, index) => (
+            <tr key={index}>
+              <td>{item.acc_id}</td>
+              <td>{item.name}</td>
+              <td>{item.depo}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
