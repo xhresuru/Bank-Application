@@ -9,7 +9,6 @@ export function Dashboard() {
       <div onClick={() => navigate("/new")}>New Customer</div>
       <div onClick={() => navigate("/deposit")}>Deposit</div>
       <div onClick={() => navigate("/withdraw")}>Withdraw</div>
-      <div onClick={() => navigate("/transfer")}>Transfer</div>
       <div onClick={() => navigate("/balance")}>Balance</div>
     </div>
   );
