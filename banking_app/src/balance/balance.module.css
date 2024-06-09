@@ -1,12 +1,60 @@
 .balCont {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
-.balCont > from {
-  display: flex;
-  flex-direction: column;
+.balCont h1,
+.balCont h2 {
+  text-align: center;
+  color: #333;
+}
+
+.balCont form {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.balCont form select {
+  width: 200px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.balCont table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.balCont table th,
+.balCont table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.balCont table th {
+  background-color: #f2f2f2;
+}
+
+.balCont table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.balCont table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.balCont div {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #333;
 }

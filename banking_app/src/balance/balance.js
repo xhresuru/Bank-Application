@@ -34,7 +34,6 @@ export function Balance() {
     const selectedId = event.target.value;
     setId(selectedId);
 
-    // Filter depoList to find the selected account
     const account = depoList.find((account) => account.acc_id === selectedId);
     setName(account?.name);
     setACC_id(account?.acc_id);
@@ -44,10 +43,7 @@ export function Balance() {
   const userDeposits = acc_id
     ? depoList.filter((item) => item.acc_id === acc_id)
     : [];
-
-  // Calculate total deposit sum of selected user
   const totalDepositSum = userDeposits.reduce((total, item) => {
-    // If the type is 'deposit', add the deposit amount, otherwise subtract it
     return item.type === "DEPOSIT"
       ? total + parseInt(item.depo)
       : total - parseInt(item.depo);

@@ -1,25 +1,34 @@
 .dashCont {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 300px);
-  gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-  justify-content: center;
-  align-items: center;
-  margin: 16px;
-}
-
-.dashCont > div {
-  background-color: rgb(118, 195, 244);
-  height: 200px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  border: 1px solid gainsboro;
-  font-size: 2em;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  font-family: "Arial", sans-serif;
 }
 
-.dashCont > div:hover {
-  background-color: dodgerblue;
+.dashCont div {
+  margin: 15px 0;
+  padding: 15px 30px;
+  width: 200px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dashCont div:hover {
+  background-color: #007bff;
   color: white;
+  transform: translateY(-5px);
+}
+
+.dashCont div:active {
+  transform: translateY(-2px);
 }
