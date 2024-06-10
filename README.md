@@ -70,7 +70,7 @@ Additional Notes
 1. This application utilizes local storage to store and retrieve account information locally.
 
 Credits
-This project is developed by Suraj Shrestha.
+1. This project is developed by Suraj Shrestha.
 
 License
-This project is licensed under the MIT License.
+1. This project is licensed under the MIT License.
