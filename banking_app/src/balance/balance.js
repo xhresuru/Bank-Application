@@ -1,14 +1,16 @@
-import styles from "./balance.module.css";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import styles from "./balance.module.css"; // Importing CSS module for styling
+import React, { useEffect, useState } from "react"; // Importing necessary hooks from React
+import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
 
 export function Balance() {
+  // State variables for account ID, list of deposits, deposit amount, account name, and selected account ID
   const [id, setId] = useState("");
   const [depoList, setDepoList] = useState([]);
   const [depo, setDepo] = useState("");
   const [names, setName] = useState("");
   const [acc_id, setACC_id] = useState("");
 
+  // useEffect hook to load stored deposit list from local storage on component mount
   useEffect(() => {
     const storedDepoList = localStorage.getItem("depo");
     if (storedDepoList) {
@@ -17,6 +19,7 @@ export function Balance() {
     }
   }, []);
 
+  // Handle form submission (not used for this component)
   const handle = (e) => {
     e.preventDefault();
     var count = depoList.length + 1;
@@ -27,10 +30,13 @@ export function Balance() {
     setDepoList(newDepoList);
     localStorage.setItem("depo", JSON.stringify(newDepoList));
   };
+
+  // Get unique account IDs from the deposit list and map them to their respective accounts
   const uniqueData = Array.from(
     new Set(depoList.map((item) => item.acc_id))
   ).map((acc_id) => depoList.find((obj) => obj.acc_id === acc_id));
 
+  // Handle account selection change to update state with selected account details
   const handleAccountChange = (event) => {
     const selectedId = event.target.value;
     setId(selectedId);
@@ -41,24 +47,31 @@ export function Balance() {
     console.log(account?.name);
   };
 
+  // Filter deposits for the selected account
   const userDeposits = acc_id
     ? depoList.filter((item) => item.acc_id === acc_id)
     : [];
+
+  // Calculate the total balance for the selected account
   const totalDepositSum = userDeposits.reduce((total, item) => {
     return item.type === "DEPOSIT"
       ? total + parseInt(item.depo)
       : total - parseInt(item.depo);
   }, 0);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigation function
 
   return (
     <>
+      {/* Back button to navigate to the previous page */}
       <button className={styles.button} onClick={() => navigate("/")}>
         Back
       </button>
       <div className={styles.balCont}>
+        {" "}
+        {/* Container for balance and statement */}
         <h1>Balance & Statement</h1>
+        {/* Form for selecting an account */}
         <form onSubmit={handle}>
           <select value={id} onChange={handleAccountChange} required>
             <option value="">Select Account</option>
@@ -69,8 +82,8 @@ export function Balance() {
             ))}
           </select>
         </form>
-
         <h2>Balance & Statement</h2>
+        {/* Table to display deposits for the selected account */}
         <table>
           <thead>
             <tr>
@@ -93,6 +106,7 @@ export function Balance() {
             ))}
           </tbody>
         </table>
+        {/* Display total balance for the selected user */}
         <div>
           Total balance of user {names} is RS {totalDepositSum}
         </div>
