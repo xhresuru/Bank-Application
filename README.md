@@ -22,52 +22,52 @@ Open your browser and go to http://localhost:3000 to access the application.
 
 Project Structure
 The project is structured as follows:
-│
-├── src/
-│   ├── Balance/
-│   ├── Dashboard/
-│   ├── Deposit/
-│   ├── New-Customer/
-│   ├── Withdraw/
-├── index.css
-├── index.js
-│   └── ...
-├── public/
-├── README.md
-└── ...
+1. │
+2. ├── src/
+3. │   ├── Balance/
+4. │   ├── Dashboard/
+5. │   ├── Deposit/
+6. │   ├── New-Customer/
+7. │   ├── Withdraw/
+8. ├── index.css
+9. ├── index.js
+10. │   └── ...
+11. ├── public/
+12. ├── README.md
+13. └── ...
 
 Usage Guidelines
 Creating an Account:
--Navigate to the Account Creation page.
--Fill in the required information such as name, email, and initial deposit amount.
--Submit the form to create a new account.
+1. Navigate to the Account Creation page.
+2. Fill in the required information such as name, email, and initial deposit amount.
+3. Submit the form to create a new account.
 
 Making a Deposit:
--Go to the Deposit page.
--Enter the deposit amount in the provided input field.
--Submit the form to deposit funds into the account.
+1. Go to the Deposit page.
+2. Enter the deposit amount in the provided input field.
+3. Submit the form to deposit funds into the account.
 
 Withdrawing Funds:
--Access the Withdrawal page.
--Input the withdrawal amount.
--Validate the withdrawal amount against the current account balance.
--Proceed with the withdrawal if the balance is sufficient.
+1. Access the Withdrawal page.
+2. Input the withdrawal amount.
+3. Validate the withdrawal amount against the current account balance.
+4. Proceed with the withdrawal if the balance is sufficient.
 
 Checking Balance:
--Visit the Balance Inquiry page.
--View the current balance of the account.
+1. Visit the Balance Inquiry page.
+2. View the current balance of the account.
 
 Responsiveness:
--The application is designed to be responsive and compatible with various screen sizes and devices.
+1. The application is designed to be responsive and compatible with various screen sizes and devices.
 
 Testing:
--Test each component's functionality, including account creation, deposit, withdrawal, and balance inquiry.
+1. Test each component's functionality, including account creation, deposit, withdrawal, and balance inquiry.
 
 Documentation:
--The codebase is documented using comments to explain complex logic and important functionality.
+1. The codebase is documented using comments to explain complex logic and important functionality.
 
 Additional Notes
--This application utilizes local storage to store and retrieve account information locally.
+1. This application utilizes local storage to store and retrieve account information locally.
 
 Credits
 This project is developed by Suraj Shrestha.
