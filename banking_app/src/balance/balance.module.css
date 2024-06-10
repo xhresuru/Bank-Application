@@ -53,6 +53,7 @@
 }
 
 .balCont table {
+  table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
@@ -63,6 +64,9 @@
   border: 1px solid #ddd;
   padding: 0.8rem;
   text-align: left;
+  text-wrap: wrap;
+  word-wrap: break-word;
+  vertical-align: middle;
 }
 
 .balCont table th {

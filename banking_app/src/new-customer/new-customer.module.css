@@ -84,3 +84,10 @@
 .custCont table tbody tr:hover {
   background-color: #f1f1f1;
 }
+
+.successMessage {
+  color: green;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+}

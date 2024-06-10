@@ -7,6 +7,7 @@ export function NewCustomer() {
   const [name, setName] = useState("");
   const [depo, setDepo] = useState("");
   const [depoList, setDepoList] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     const storedDepoList = localStorage.getItem("depo");
@@ -24,6 +25,12 @@ export function NewCustomer() {
     ];
     setDepoList(newDepoList);
     localStorage.setItem("depo", JSON.stringify(newDepoList));
+    setSuccessMessage("Deposit added successfully!");
+
+    // Clear the success message after 3 seconds
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
   };
 
   const uniqueAccIds = [...new Set(depoList.map((item) => item.acc_id))];
@@ -59,25 +66,9 @@ export function NewCustomer() {
           />
           <button type="submit">Add Deposit</button>
         </form>
-
-        {/* <table>
-          <thead>
-            <tr>
-              <th>Account ID</th>
-              <th>Name</th>
-              <th>Deposit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {depoList.map((item, index) => (
-              <tr key={index}>
-                <td>{item.acc_id}</td>
-                <td>{item.name}</td>
-                <td>{item.depo}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
+        {successMessage && (
+          <div className={styles.successMessage}>{successMessage}</div>
+        )}
       </div>
     </>
   );
